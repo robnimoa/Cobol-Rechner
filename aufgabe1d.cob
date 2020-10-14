@@ -30,11 +30,18 @@
                 display "9) Beenden"
                 move zero to eingabe-zeichen
                 accept eingabe-zeichen
-                evaluate eingabe-zeichen
-                   when "1" perform eingabe-zahlen
-                   when "9" set eingabe-menu-beenden to true
+                perform eingabe-menu
         end-perform
         stop run.
+                        
+       eingabe-menu section.
+        evaluate true
+                when eingabe-zeichen = "1"
+                        perform eingabe-zahlen
+                when eingabe-zeichen = "9" set
+                        eingabe-menu-beenden to true
+        end-evaluate
+        exit.
 
        datenfelder-loeschen section.
         move zeroes to zahl1
@@ -92,6 +99,7 @@
                 when other display "Unbekannter Operator. Bitte erneut"
                         &" versuchen."
                         perform auswahl-operator
+        end-evaluate
         exit.
 
        addieren section.
@@ -123,5 +131,3 @@
         on size error display "Achtung Überlauf"
         not on size error display ergb
         exit.
-
-       END PROGRAM calculator.
